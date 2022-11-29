@@ -1,15 +1,14 @@
 <?php include('db.php');
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-  if(!empty($id)){
-  $query = "Select * from tbl_category WHERE cat_id='".$id."'";
+include('auth.php');
+if(isset($_SESSION['id'])){
+  if(!empty($_SESSION['id'])){
+  $query = "Select * from tbl_admin WHERE id='".$_SESSION['id']."'";
   $result = mysqli_query($connect,$query);
   if(mysqli_num_rows($result) > 0){
           
       while($row = mysqli_fetch_object($result)){
-          $id = $row->cat_id;
-          $title = $row->title;
-          $is_featured = $row->is_featured;
+          $id = $row->id;
+          $full_name = $row->full_name;
           $img = $row->img;
   
       }
@@ -18,9 +17,8 @@ if(isset($_GET['id'])){
   }
 if(isset($_POST['edit'])){
 
-        $title = $_POST['title'];
-        $is_featured = $_POST['featured'];
-        $id = $_POST['catid'];
+        $full_name = $_POST['full_name'];
+        $id = $_POST['id'];
         if(!empty($_FILES["photoupload"]["name"])) { 
             $target_dir = "uploads/categories/";
             // Get file info 
@@ -33,11 +31,11 @@ if(isset($_POST['edit'])){
                 if(move_uploaded_file($image,$target_dir.$_FILES["photoupload"]["name"])){
                 //$imgContent = addslashes(file_get_contents($image)); 
                 // Insert image content into database 
-                $update = "UPDATE tbl_category SET title='".$title."',is_featured = '".$is_featured."',img='".$fileName."' WHERE cat_id='".$id."'"; 
+                $update = "UPDATE tbl_admin SET full_name='".$full_name."',img='".$fileName."' WHERE cat_id='".$id."'"; 
                 $result = mysqli_query($connect,$update);
                 if($result == TRUE){
                    set_msg('Record is updated successfully'); 
-                   header('location:category.php');
+                   header('location:profile.php');
                 }else{ 
                   set_msg('Error in updating data','danger');
                 }  
@@ -48,12 +46,12 @@ if(isset($_POST['edit'])){
     } else{
     $photouploadpreview = $_POST['photouploadpreview'];
     $fileName = $photouploadpreview;
-      $query = "UPDATE  tbl_category SET title='".$title."',is_featured = '".$is_featured."',img = '".$fileName."' WHERE cat_id='".$id."'";
+      $query = "UPDATE  tbl_admin SET full_name='".$full_name."',img = '".$fileName."' WHERE id='".$id."'";
       echo $query;
       $result = mysqli_query($connect,$query);
       if($result == TRUE){
         set_msg("Record is updated Successfully");
-        header('location:category.php');
+        header('location:profile.php');
       }else{
         set_msg('Error in updating data','danger');
       }
@@ -87,12 +85,13 @@ if(isset($_POST['edit'])){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Category</h1>
-            <div>
+            <h1>Update Profile</h1>
+            <?php get_msg();?>
+            </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Edit Customer</li>
+              <li class="breadcrumb-item active">Profile</li>
             </ol>
           </div>
         </div>
@@ -103,22 +102,19 @@ if(isset($_POST['edit'])){
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <h4><a href="category.php" class="card-link">Back</a></h4>
+          <h4><a href="dashboard.php" class="card-link">Back</a></h4>
               <!-- /.card-header -->
               <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edit Customer</h3>
+                <h3 class="card-title">Edit Profile</h3>
+                
               </div>
               <!-- /.card-header -->
-              <form action="edit_customer.php" method="post" enctype="multipart/form-data">
+              <form action="profile.php" method="post" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="title">Category Name</code></label>
-                  <input type="text" class="form-control form-control-border" name="title" id="title" placeholder="Enter Title" value="<?php echo $title;?>" required>
-                </div>
-                <div class="form-group icheck-primary">
-                  <label for="featured">Featured</code></label>
-                  <input type="checkbox" class="form-check-input" name="featured" id="featured"  value="1" <?php if($is_featured == 1){ echo 'checked="checked"'; }?>>
+                  <label for="title">Full Name</code></label>
+                  <input type="text" class="form-control form-control-border" name="full_name" id="full_name" placeholder="Enter Full Name" value="<?php echo $full_name;?>" required>
                 </div>
                 <div class="form-group">
                     <label for="photoupload">Image</label>
@@ -130,7 +126,7 @@ if(isset($_POST['edit'])){
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
                       </div>
-                      <input type="hidden" id="catid" name="catid" value=<?php echo $id;?>>
+                      <input type="hidden" id="id" name="id" value=<?php echo $id;?>>
                     </div>
                     <img src="<?php echo $baseURL.$img;?>" width="50px" height="100%" class="pull-right">
                     <input type="hidden" value="<?php echo $img;?>" name="photouploadpreview" id="photouploadpreview" >

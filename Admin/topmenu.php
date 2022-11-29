@@ -5,6 +5,9 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>-->
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="dashboard.php" class="nav-link">Dashboard</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="category.php" class="nav-link">Category</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
@@ -19,21 +22,33 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="admin.php" class="nav-link">Admin</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="logout.php" class="nav-link">Logout</a>
-      </li>
     </ul>
     
     <!-- Right navbar links -->
-    <div class="navbar-nav ml-auto">
-    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?php echo $baseURL.$_SESSION['pic'];?>" class="img-circle elevation-2" alt="User Image">
+    <ul class="navbar-nav ml-auto">
+      <!-- Navbar Search -->
+      <!-- Notifications Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="fas fa-cog"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <div class="dropdown-divider"></div>
+          <a href="profile.php" class="dropdown-item">
+            <i class="fas fa-user mr-2"></i> Profile
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="change_pass.php" class="dropdown-item">
+            <i class="fas fa-key mr-2"></i> Password Management
+          </a>
+          <div class="dropdown-divider"></div>
         </div>
-        <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['full_name'];?></a>
-        </div>
-      </div>
-</div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link"  href="logout.php">
+        <i class="fas fa-sign-out-alt"></i>
+        </a>
+      </li>
+    </ul>
 </nav>
   

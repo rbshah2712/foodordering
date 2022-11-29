@@ -1,6 +1,22 @@
 <?php include('db.php');
-
-$query = "Select * from tbl_category WHERE is_active='1'";
+if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+  $page_no = $_GET['page_no'];
+  } else {
+    $page_no = 1;
+        }
+ 
+  $total_records_per_page = 2;
+  $offset = ($page_no-1) * $total_records_per_page;
+  $previous_page = $page_no - 1;
+  $next_page = $page_no + 1;
+  $adjacents = "2"; 
+ 
+  $result_count = mysqli_query($connect,"SELECT COUNT(*) As total_records FROM tbl_customer ");
+  $total_records = mysqli_fetch_array($result_count);
+  $total_records = $total_records['total_records'];
+  $total_no_of_pages = ceil($total_records / $total_records_per_page);
+  $second_last = $total_no_of_pages - 1; // total page minus 1
+$query = "Select * from tbl_customer WHERE is_active='1'";
 $result = mysqli_query($connect,$query);
 
 ?>
@@ -39,7 +55,7 @@ $result = mysqli_query($connect,$query);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3>Categories</h3>
+            <h3>Customers</h3>
             <?php get_msg();?>
           </div>
           <div class="col-sm-6">
@@ -82,25 +98,17 @@ $result = mysqli_query($connect,$query);
                         ?>
                     <tr>
                       <td><?php echo $row->id;?></td>
-                      <td><?php echo $row->title;?></td>
-                      <td><img src="<?php echo $baseURL.$row->img;?>" alt="<?php echo $row->title;?>" width="50px" height="100%"></td>
-                      <td><?php echo $row->is_featured;?></td>
-                      <td><a href="edit_customer.php?id=<?php echo $row->cat_id;?>"><button type="button" id="edit" value="Edit" class="btn"><i class="fa fa-edit"></i></button></a>&nbsp;
-                      <a onclick='javascript:confirmationDelete($(this));return false;' href='del_customer.php?id=<?php echo $row->cat_id;?>' class="btn"><i class="fa fa-trash"></i></a>
+                      <td><?php echo $row->cust_name;?></td>
+                      <td><?php echo $row->cust_contact;?></td>
+                      <td><?php echo $row->cust_email;?></td>
+                      <td><a href="edit_customer.php?id=<?php echo $row->id;?>"><button type="button" id="edit" value="Edit" class="btn"><i class="fa fa-edit"></i></button></a>&nbsp;
+                      <a onclick='javascript:confirmationDelete($(this));return false;' href='del_customer.php?id=<?php echo $row->id;?>' class="btn"><i class="fa fa-trash"></i></a>
                     <?php } } ?>
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
-              </div>
+              <?php include('pagination.php');?>
             </div>
             <!-- /.card -->
             <!-- /.card -->

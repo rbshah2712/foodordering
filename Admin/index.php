@@ -4,7 +4,7 @@ if(isset($_POST['login'])){
     $username = $_POST['username'];
     $pwd = $_POST['pwd'];
    // $md5pass = $pwd);
-   if($_POST["remember_me"]=='1' || $_POST["remember_me"]=='on')
+   if(isset($_POST["remember_me"]) && $_POST["remember_me"]=='1' || $_POST["remember_me"]=='on')
    {
         $hour = time() + 3600 * 24 * 30;
         setcookie('username', $username, $hour);
@@ -17,6 +17,7 @@ if(isset($_POST['login'])){
     $result = mysqli_query($connect,$query);
     if(mysqli_num_rows($result) > 0){
         while($row = mysqli_fetch_object($result)){
+            $_SESSION["loggedin"] = true;
             $_SESSION['id'] = $row->id;
             $_SESSION['full_name'] = $row->full_name;
             $_SESSION['pic'] = $row->img;
@@ -40,6 +41,15 @@ if(isset($_POST['login'])){
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
+<section class="container-fluid">
+<div class="row mb-2 justify-content-center">
+    <a href="#" class="brand-link justify-content-center">
+        <img src="img/logo_1.png" alt="Food Ordering System" class="brand-image img-circle elevation-3" style="opacity: .8">
+      </a>
+    </div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
 <div class="card card-info">
     <div class="card-header">
       <h3 class="card-title">Admin Panel</h3>
@@ -61,13 +71,13 @@ if(isset($_POST['login'])){
             <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>">
           </div>
         </div>
-        <div class="form-group">
-          
-      
-        <div class="custom-control custom-checkbox">
-                          <input class="custom-control-input" type="checkbox" name="remember_me" id="remember_me">
-                          <label for="remember_me" class="custom-control-label">Remember Me</label>
-                        </div>
+        <div class="row checkbox-row">
+        <div class="custom-control custom-checkbox col-sm-6">
+        <div class="checkbox-inline" style="text-align:center;">
+          <input class="custom-control-input" type="checkbox" name="remember_me" id="remember_me">
+          <label for="remember_me" class="custom-control-label">Remember Me</label>
+        </div>
+      </div>
       </div>
       </div>
       <!-- /.card-body -->
@@ -81,6 +91,9 @@ if(isset($_POST['login'])){
     </form>
   </div>
   </div>
+        </div>
+    </div>
+</section>
   </div>
 </body>
 </html>

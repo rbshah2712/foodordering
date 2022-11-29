@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 error_reporting(E_ALL);
 $baseURL = "http://localhost/Food-order/Admin/";
 $db = "food-order";
@@ -7,11 +8,11 @@ $host = "localhost";
 $user = "root";
 $pwd = "";
 $website = "Food Ordering System";
-
+global $connect;
 $connect = mysqli_connect($host,$user,$pwd);
 
 if (!$connect) {
-    die('Could not connect: ' . mysql_error());
+    die('Could not connect: ' . mysqli_connect_error($connect));
 }
 else {
     $dbconnect = mysqli_select_db($connect,$db);
@@ -34,4 +35,7 @@ function set_msg($msg,$type=null){
        unset($_SESSION['type']);
      }//endif isset session[msg]
  }//end get_msg()
+
+
+  
  ?>

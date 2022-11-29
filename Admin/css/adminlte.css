@@ -12523,6 +12523,13 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
   width: auto;
 }
 
+.brand-link .brand-image-custom {
+  float: left;
+  line-height: .8;
+  margin-top: -.1rem;
+  max-height: 150px;
+  width: auto;
+}
 .brand-link .brand-image-xl {
   line-height: .8;
   max-height: 40px;

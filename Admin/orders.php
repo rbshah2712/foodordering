@@ -1,4 +1,21 @@
 <?php include('db.php');
+if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+  $page_no = $_GET['page_no'];
+  } else {
+    $page_no = 1;
+        }
+ 
+  $total_records_per_page = 2;
+  $offset = ($page_no-1) * $total_records_per_page;
+  $previous_page = $page_no - 1;
+  $next_page = $page_no + 1;
+  $adjacents = "2"; 
+ 
+  $result_count = mysqli_query($connect,"SELECT COUNT(*) As total_records FROM tbl_order ");
+  $total_records = mysqli_fetch_array($result_count);
+  $total_records = $total_records['total_records'];
+  $total_no_of_pages = ceil($total_records / $total_records_per_page);
+  $second_last = $total_no_of_pages - 1; // total page minus 1
 $query = "Select * from tbl_order";
 $result = mysqli_query($connect,$query);
 
@@ -109,15 +126,7 @@ $result = mysqli_query($connect,$query);
                 </table>
               </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                </ul>
-              </div>
+            <?php include('pagination.php');?>
             </div>
             <!-- /.card -->
             <!-- /.card -->
