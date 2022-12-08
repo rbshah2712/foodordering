@@ -133,6 +133,62 @@
               <a href="restaurant.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-dark">
+              <div class="inner">
+                <h3><?php echo $total_category;?></h3>
+
+                <p>Processing Orders</p>
+              </div>
+              <div class="icon">
+              <i class="fa fa-spinner" aria-hidden="true" style="color:white;"></i>
+              </div>
+              <a href="category.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-secondary">
+              <div class="inner">
+                <h3><?php echo $total_category;?></h3>
+
+                <p>Cancelled Orders</p>
+              </div>
+              <div class="icon">
+              <i class="fa fa-times" aria-hidden="true"></i>
+              </div>
+              <a href="category.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-white">
+              <div class="inner">
+                <h3><?php echo $total_category;?></h3>
+
+                <p>Delivered Orders</p>
+              </div>
+              <div class="icon">
+              <i class="fa fa-check" aria-hidden="true"></i>
+              </div>
+              <a href="category.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+              <div class="inner">
+                <h3><?php echo $total_category;?></h3>
+
+                <p>Payments</p>
+              </div>
+              <div class="icon">
+              <i class="fas fa-dollar-sign"></i>
+              </div>
+              <a href="category.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
           <!-- ./col -->
         </div>
         <!-- /.row -->

@@ -20,10 +20,17 @@
         <a href="orders.php" class="nav-link">Orders</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="payments.php" class="nav-link">Payments</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="customers.php" class="nav-link">Customers</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="admin.php" class="nav-link">Admin</a>
+      </li>
+
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="vendor.php" class="nav-link">Vendors</a>
       </li>
     </ul>
     
