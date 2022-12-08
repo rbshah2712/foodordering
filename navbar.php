@@ -1,24 +1,34 @@
 <section class="navbar">
 <div class="container">
     <div class="logo">
-        <a href="#" title="Logo">
-            <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
+        <a href="index.php" title="Logo">
+            <img src="images/logo_1.png" alt="Restaurant Logo" class="img-responsive">
         </a>
     </div>
 
     <div class="menu text-right">
         <ul>
-            <li>
-                <a href="index.html">Home</a>
+        
+        <li>
+                <a href="about.php">About Us</a>
             </li>
             <li>
                 <a href="categories.php">Categories</a>
             </li>
             <li>
-                <a href="foods.html">Foods</a>
+                <a href="foods.php">Foods</a>
             </li>
             <li>
-                <a href="#">Contact</a>
+                <a href="plan.php">Plans</a>
+            </li>
+            <li>
+                <a href="contact.php">Contact</a>
+            </li>
+            <li>
+                <a href="login.php">Login</a>
+            </li>
+            <li>
+                <a href="cart.php"><i class="fa-regular fa-cart-shopping"></i></a>
             </li>
         </ul>
     </div>

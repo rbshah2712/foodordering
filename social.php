@@ -1,5 +1,5 @@
 <section class="social">
-<div class="container text-center">
+<div class="container text-right">
     <ul>
         <li>
             <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></a>

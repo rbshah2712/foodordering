@@ -8,6 +8,9 @@
         <a href="dashboard.php" class="nav-link">Dashboard</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="restaurant.php" class="nav-link">Restaurant</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="category.php" class="nav-link">Category</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">

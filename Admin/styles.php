@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="css/adminlte.min.css">
   <link rel="stylesheet" href="css/custom.css">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="css/fontawesome-free/all.min.css">
+  <link rel="stylesheet" href="css/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
