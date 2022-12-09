@@ -1,17 +1,20 @@
 <?php include('db.php');
+$foods =  mysqli_query($connect,"Select * from tbl_food where is_active='1'");
 if(isset($_POST['add'])){
 
-        $title = $_POST['title'];
-        $is_featured = $_POST['featured'];
+        $food_name = $_POST['food_name'];
+        $username = $_POST['username'];
+        $rating = $_POST['rating'];
+        $notes = $_POST['notes'];
        
-        if($title!= NULL){
+        if($food_name!= NULL){
        // $photoupload = $_POST['photoupload'];
-        $query = "INSERT INTO tbl_food_review(title,is_featured,img,is_active) VALUES('".$title."','".$is_featured."','','1')";
+        $query = "INSERT INTO tbl_food_review(food_id,user_id,stars,review_note) VALUES('".$food_name."','".$username."','".$rating."','".$notes."')";
         $result = mysqli_query($connect,$query);
         $id = mysqli_insert_id($connect);
  
       set_msg('Record is added successfully'); 
-      header('location:category.php');
+      header('location:food_review.php');
         }
 
 }
@@ -68,7 +71,12 @@ if(isset($_POST['add'])){
               <div class="card-body">
                 <div class="form-group">
                   <label for="fullname">Food Name</code></label>
-                  <input type="text" class="form-control form-control-border" name="title" id="title" placeholder="Enter Title" required>
+                  <select class="form-control" id="food_name" name="food_name">
+                          <?php
+                             while($row = mysqli_fetch_object($foods)){?>
+                            <option value="<?php echo $row->id;?>"><?php echo $row->food_name;?></option>
+                            <?php } ?>
+                        </select>
                 </div>
                 <div class="form-group">
                   <label for="featured">User Name</code></label>
@@ -79,7 +87,7 @@ if(isset($_POST['add'])){
                   <input type="text" class="form-control form-control-border" name="rating" id="rating" placeholder="Enter Rating" >
                 </div>
                 <div class="form-group">
-                  <label for="featured">Note</code></label>
+                  <label for="featured">Notes</code></label>
                   <textarea  class="form-control form-control-border" name="notes" id="notes" placeholder="Enter Review Note"></textarea>
                 </div>
                 <div class="form-group">
