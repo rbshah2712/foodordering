@@ -5,9 +5,9 @@
     $result = mysqli_query($connect,$query);
     if($result == TRUE){
         $_SESSION['msg'] = "Record is deleted successfully";
-       header('location:admin.php');
+       header('location:customer.php');
     }else{
         $_SESSION['msg'] = "Error in deleting record";
-        header('location:admin.php');
+        header('location:customer.php');
     }
 ?>

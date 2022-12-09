@@ -1,16 +1,19 @@
 <?php include('db.php');
 if(isset($_POST['add'])){
 
-        $title = $_POST['title'];
-        $is_featured = $_POST['featured'];
+        $cust_name = $_POST['cust_name'];
+        $cust_contact = $_POST['cust_contact'];
+        $cust_email = $_POST['cust_email'];
+        $cust_address = $_POST['cust_address'];
+        
        
-        if($title!= NULL){
+        if($cust_name!= NULL){
        // $photoupload = $_POST['photoupload'];
-        $query = "INSERT INTO tbl_category(title,is_featured,img,is_active) VALUES('".$title."','".$is_featured."','','1')";
+        $query = "INSERT INTO tbl_customer(cust_name,cust_contact,cust_email,cust_address,cust_img,is_active) VALUES('".$cust_name."','".$cust_contact."','".$cust_email."','".$cust_address."','','1')";
         $result = mysqli_query($connect,$query);
         $id = mysqli_insert_id($connect);
         if(!empty($_FILES["photoupload"]["name"])) { 
-            $target_dir = "uploads/categories/";
+            $target_dir = "uploads/customers/";
             // Get file info 
             $fileName = $target_dir.basename($_FILES["photoupload"]["name"]); 
             $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION)); 
@@ -21,11 +24,11 @@ if(isset($_POST['add'])){
                 if(move_uploaded_file($image,$target_dir.$_FILES["photoupload"]["name"])){
                 //$imgContent = addslashes(file_get_contents($image)); 
                 // Insert image content into database 
-                $update = "UPDATE tbl_category SET img='".$fileName."' WHERE cat_id='".$id."'"; 
+                $update = "UPDATE tbl_customer SET cust_img='".$fileName."' WHERE id='".$id."'"; 
                 $result = mysqli_query($connect,$update);
                 if($result == TRUE){ 
                    set_msg('Record is added successfully'); 
-                   header('location:category.php');
+                   header('location:customer.php');
                 }else{ 
                     set_msg('Error in storing record','danger');
                 }  
@@ -38,7 +41,7 @@ if(isset($_POST['add'])){
     } 
   }else{
       set_msg('Record is added successfully'); 
-      header('location:category.php');
+      header('location:customer.php');
   }
 
 }
@@ -74,12 +77,12 @@ if(isset($_POST['add'])){
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add Category</h1>
+            <h1>Add Customer</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Add Category</li>
+              <li class="breadcrumb-item active">Add Customer</li>
             </ol>
           </div>
         </div>
@@ -90,22 +93,30 @@ if(isset($_POST['add'])){
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-          <h4><a href="category.php" class="card-link">Back</a></h4>
+          <h4><a href="customer.php" class="card-link">Back</a></h4>
               <!-- /.card-header -->
               <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add Category</h3>
+                <h3 class="card-title">Add Customer</h3>
               </div>
               <!-- /.card-header -->
-              <form action="add_category.php" method="post" enctype="multipart/form-data">
+              <form action="add_customer.php" method="post" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="fullname">Category Name</code></label>
-                  <input type="text" class="form-control form-control-border" name="title" id="title" placeholder="Enter Title" required>
+                  <label for="cust_name">Customer Name</code></label>
+                  <input type="text" class="form-control form-control-border" name="cust_name" id="cust_name" placeholder="Enter Customer Name" required>
                 </div>
-                <div class="form-group icheck-primary">
-                  <label for="featured">Featured</code></label>
-                  <input type="checkbox" class="form-check-input" name="featured" id="featured" placeholder="Enter Username" value="1">
+                <div class="form-group">
+                  <label for="cust_contact">Customer Contact</code></label>
+                  <input type="text" class="form-control form-control-border" name="cust_contact" id="cust_contact" placeholder="Enter Customer Contact" required>
+                </div>
+                <div class="form-group">
+                  <label for="cust_email">Customer Email</code></label>
+                  <input type="text" class="form-control form-control-border" name="cust_email" id="cust_email" placeholder="Enter Customer Email" required>
+                </div>
+                <div class="form-group">
+                  <label for="cust_address">Customer Address</code></label>
+                  <textarea class="form-control form-control-border" name="cust_address" id="cust_address" placeholder="Enter Customer Address"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="photoupload">Image</label>

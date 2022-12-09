@@ -2,15 +2,17 @@
 if(isset($_GET['id'])){
     $id = $_GET['id'];
   if(!empty($id)){
-  $query = "Select * from tbl_category WHERE cat_id='".$id."'";
+  $query = "Select * from tbl_customer WHERE id='".$id."'";
   $result = mysqli_query($connect,$query);
   if(mysqli_num_rows($result) > 0){
           
       while($row = mysqli_fetch_object($result)){
-          $id = $row->cat_id;
-          $title = $row->title;
-          $is_featured = $row->is_featured;
-          $img = $row->img;
+          $id = $row->id;
+          $cust_name = $row->cust_name;
+          $cust_contact = $row->cust_contact;
+          $cust_email = $row->cust_email;
+          $cust_address = $row->cust_address;
+          $cust_img = $row->cust_img;
   
       }
   }
@@ -18,9 +20,11 @@ if(isset($_GET['id'])){
   }
 if(isset($_POST['edit'])){
 
-        $title = $_POST['title'];
-        $is_featured = $_POST['featured'];
-        $id = $_POST['catid'];
+        $cust_name = $_POST['cust_name'];
+        $cust_contact = $_POST['cust_contact'];
+        $cust_email = $_POST['cust_email'];
+        $cust_address = $_POST['cust_address'];
+        $id = $_POST['id'];
         if(!empty($_FILES["photoupload"]["name"])) { 
             $target_dir = "uploads/categories/";
             // Get file info 
@@ -33,11 +37,11 @@ if(isset($_POST['edit'])){
                 if(move_uploaded_file($image,$target_dir.$_FILES["photoupload"]["name"])){
                 //$imgContent = addslashes(file_get_contents($image)); 
                 // Insert image content into database 
-                $update = "UPDATE tbl_category SET title='".$title."',is_featured = '".$is_featured."',img='".$fileName."' WHERE cat_id='".$id."'"; 
+                $update = "UPDATE tbl_customer SET cust_name='".$cust_name."',cust_contact='".$cust_contact."',cust_email='".$cust_email."',cust_address='".$cust_address."',cust_img='".$fileName."' WHERE id='".$id."'"; 
                 $result = mysqli_query($connect,$update);
                 if($result == TRUE){
                    set_msg('Record is updated successfully'); 
-                   header('location:category.php');
+                   header('location:customer.php');
                 }else{ 
                   set_msg('Error in updating data','danger');
                 }  
@@ -48,12 +52,12 @@ if(isset($_POST['edit'])){
     } else{
     $photouploadpreview = $_POST['photouploadpreview'];
     $fileName = $photouploadpreview;
-      $query = "UPDATE  tbl_category SET title='".$title."',is_featured = '".$is_featured."',img = '".$fileName."' WHERE cat_id='".$id."'";
+      $query = "UPDATE  tbl_customer SET cust_name='".$cust_name."',cust_contact='".$cust_contact."',cust_email='".$cust_email."',cust_address='".$cust_address."',cust_img='".$fileName."' WHERE id='".$id."'";
       echo $query;
       $result = mysqli_query($connect,$query);
       if($result == TRUE){
         set_msg("Record is updated Successfully");
-        header('location:category.php');
+        header('location:customer.php');
       }else{
         set_msg('Error in updating data','danger');
       }
@@ -65,7 +69,7 @@ if(isset($_POST['edit'])){
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Simple Tables</title>
+  <title>AdminLTE 3 | Edit Customer</title>
 
   <!-- Google Font: Source Sans Pro -->
   <?php include('styles.php');?>
@@ -112,13 +116,22 @@ if(isset($_POST['edit'])){
               <!-- /.card-header -->
               <form action="edit_customer.php" method="post" enctype="multipart/form-data">
               <div class="card-body">
+              <div class="card-body">
                 <div class="form-group">
-                  <label for="title">Category Name</code></label>
-                  <input type="text" class="form-control form-control-border" name="title" id="title" placeholder="Enter Title" value="<?php echo $title;?>" required>
+                  <label for="cust_name">Customer Name</code></label>
+                  <input type="text" class="form-control form-control-border" name="cust_name" id="cust_name" placeholder="Enter Customer Name" required value="<?php echo $cust_name;?>">
                 </div>
-                <div class="form-group icheck-primary">
-                  <label for="featured">Featured</code></label>
-                  <input type="checkbox" class="form-check-input" name="featured" id="featured"  value="1" <?php if($is_featured == 1){ echo 'checked="checked"'; }?>>
+                <div class="form-group">
+                  <label for="cust_contact">Customer Contact</code></label>
+                  <input type="text" class="form-control form-control-border" name="cust_contact" id="cust_contact" placeholder="Enter Customer Contact" required value="<?php echo $cust_contact;?>">
+                </div>
+                <div class="form-group">
+                  <label for="cust_email">Customer Email</code></label>
+                  <input type="text" class="form-control form-control-border" name="cust_email" id="cust_email" placeholder="Enter Customer Email" required value="<?php echo $cust_email;?>">
+                </div>
+                <div class="form-group">
+                  <label for="cust_address">Customer Address</code></label>
+                  <textarea class="form-control form-control-border" name="cust_address" id="cust_address" placeholder="Enter Customer Address" ><?php echo $cust_address;?></textarea>
                 </div>
                 <div class="form-group">
                     <label for="photoupload">Image</label>
@@ -130,10 +143,10 @@ if(isset($_POST['edit'])){
                       <div class="input-group-append">
                         <span class="input-group-text">Upload</span>
                       </div>
-                      <input type="hidden" id="catid" name="catid" value=<?php echo $id;?>>
+                      <input type="hidden" id="id" name="id" value=<?php echo $id;?>>
                     </div>
-                    <img src="<?php echo $baseURL.$img;?>" width="50px" height="100%" class="pull-right">
-                    <input type="hidden" value="<?php echo $img;?>" name="photouploadpreview" id="photouploadpreview" >
+                    <img src="<?php echo $baseURL.$cust_img;?>" width="50px" height="100%" class="pull-right">
+                    <input type="hidden" value="<?php echo $cust_img;?>" name="photouploadpreview" id="photouploadpreview" >
                   </div>
                 <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-flat" id="edit" name="edit" value="edit">Edit</button>
