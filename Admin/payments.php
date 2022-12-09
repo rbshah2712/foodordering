@@ -11,12 +11,12 @@ if (isset($_GET['page_no']) && $_GET['page_no']!="") {
   $next_page = $page_no + 1;
   $adjacents = "2"; 
  
-  $result_count = mysqli_query($connect,"SELECT COUNT(*) As total_records FROM tbl_restaurant ");
+  $result_count = mysqli_query($connect,"SELECT COUNT(*) As total_records FROM tbl_payment ");
   $total_records = mysqli_fetch_array($result_count);
   $total_records = $total_records['total_records'];
   $total_no_of_pages = ceil($total_records / $total_records_per_page);
   $second_last = $total_no_of_pages - 1; // total page minus 1
-$query = "Select * from tbl_restaurant WHERE is_active='1'";
+$query = "Select * from tbl_payment";
 $result = mysqli_query($connect,$query);
 
 ?>
@@ -71,7 +71,6 @@ $result = mysqli_query($connect,$query);
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Payments</h3><br/><br/> 
-                <a href="add_restaurant.php"><button type="button" id="add" value="Add" class="btn btn-primary">Add</button></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -79,14 +78,11 @@ $result = mysqli_query($connect,$query);
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Restaurant Name</th>
-                      <th>Restaurant Address</th>
-                      <th>Restaurant Contact</th>
-                      <th>Restaurant Email</th>
-                      <th>Restaurant Website</th>
-                      <th>Featured</th>
-                      <th>Restaurant Image</th>
-                      <th>Actions</th>
+                      <th>#Order</th>
+                      <th>User Name</th>
+                      <th>Payment Type</th>
+                      <th>Payment Status</th>
+                      <th>Payment Amount</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -97,16 +93,12 @@ $result = mysqli_query($connect,$query);
                         ?>
                     <tr>
                       <td><?php echo $row->id;?></td>
-                      <td><?php echo $row->res_name;?></td>
-                      <td><?php echo $row->res_address;?></td>
-                      <td><?php echo $row->res_contact;?></td>
-                      <td><?php echo $row->res_email;?></td>
-                      <td><?php echo $row->res_website;?></td>
-                      <td><?php echo $row->is_featured;?></td>
-                      <td><img src="<?php echo $baseURL.$row->res_img;?>" alt="<?php echo $row->res_name;?>" width="50px" height="100%"></td>
-                      <td><a href="edit_restaurant.php?id=<?php echo $row->id;?>"><button type="button" id="edit" value="Edit" class="btn"><i class="fa fa-edit"></i></button></a>&nbsp;
-                      <a onclick='javascript:confirmationDelete($(this));return false;' href='del_restaurant.php?id=<?php echo $row->id;?>' class="btn"><i class="fa fa-trash"></i></a>
-                    <?php } } ?>
+                      <td><?php echo $row->order_id;?></td>
+                      <td><?php echo $row->user_id;?></td>
+                      <td><?php echo $row->payment_type;?></td>
+                      <td><?php echo $row->payment_status;?></td>
+                      <td><?php echo $row->payment_amount;?></td>
+                       <?php } } ?>
                   </tbody>
                 </table>
               </div>
