@@ -31,10 +31,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="admin.php" class="nav-link">Admin</a>
       </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="vendor.php" class="nav-link">Vendors</a>
-      </li>
     </ul>
     
     <!-- Right navbar links -->
