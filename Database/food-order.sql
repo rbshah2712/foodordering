@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2022 at 09:55 PM
+-- Generation Time: Dec 10, 2022 at 12:17 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -85,8 +85,17 @@ CREATE TABLE `tbl_customer` (
   `cust_name` varchar(255) NOT NULL,
   `cust_contact` varchar(255) NOT NULL,
   `cust_email` varchar(255) NOT NULL,
+  `cust_address` varchar(255) NOT NULL,
+  `cust_img` varchar(255) NOT NULL,
   `is_active` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_customer`
+--
+
+INSERT INTO `tbl_customer` (`id`, `cust_name`, `cust_contact`, `cust_email`, `cust_address`, `cust_img`, `is_active`) VALUES
+(1, 'Ruchi Sanghvi', '469-434-7643', 'rsanghvi2712@gmail.com', 'ddadadadadd', 'uploads/customers/02a04bdf-1141-4c8d-9942-0648f5036673.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -130,6 +139,14 @@ CREATE TABLE `tbl_food_review` (
   `review_note` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tbl_food_review`
+--
+
+INSERT INTO `tbl_food_review` (`id`, `food_id`, `user_id`, `stars`, `review_note`) VALUES
+(1, 0, 1, 4, 'Nice.Super tasty'),
+(2, 2, 1, 4, 'Nice');
+
 -- --------------------------------------------------------
 
 --
@@ -159,6 +176,21 @@ CREATE TABLE `tbl_order` (
 INSERT INTO `tbl_order` (`id`, `order_number`, `food`, `price`, `quantity`, `total`, `total_price`, `order_date`, `order_status`, `cust_name`, `cust_address`, `cust_contact`, `cust_email`) VALUES
 (7, 'RES7', 'Naan', '30', '1.00', '30', '30.00', '2022-11-14 00:00:00', 'Received', 'Veer', '4245 Cedar Bridge walk', '469-434-7643', 'rsanghvi2712@gmail.com'),
 (8, 'RES8', 'Naan', '30', '1.00', '30', '30.00', '2022-11-14 00:00:00', 'Received', 'Veer', '4245 Cedar Bridge walk', '469-434-7643', 'rsanghvi2712@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_payment`
+--
+
+CREATE TABLE `tbl_payment` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `payment_type` varchar(255) NOT NULL,
+  `payment_status` varchar(255) NOT NULL,
+  `payment_amount` double(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -254,7 +286,7 @@ ALTER TABLE `tbl_category`
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_food`
@@ -266,7 +298,7 @@ ALTER TABLE `tbl_food`
 -- AUTO_INCREMENT for table `tbl_food_review`
 --
 ALTER TABLE `tbl_food_review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_order`
