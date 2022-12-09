@@ -59,7 +59,7 @@ if(isset($_POST['send'])){
     <!-- /.card-header -->
     <!-- form start -->
     <?php get_msg();?>
-    <form class="form-horizontal" action="forgot_pass.php" method="post">
+    <form class="form-horizontal" action="forgot_pass.php" method="post" id="forgot_passform">
       <div class="card-body">
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
@@ -87,5 +87,44 @@ if(isset($_POST['send'])){
     
 </section>
   </div>
+  <?php include('scripts.php');?>
+  <script>
+   $(document).ready(function () {
+   /*  $.validator.setDefaults({
+    submitHandler: function () {
+      alert( "Form successful submitted!" );
+    }
+  });*/
+  $('#forgot_passform').validate({
+    rules: {
+      emailaddress: {
+        required: true,
+        email: true,
+      }
+    },
+    messages: {
+      email: {
+        required: "Please enter a email address",
+        emailaddress: "Please enter a valid email address"
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    },
+     
+    submitHandler: function (form) {
+      $('#forgot_passform').submit();
+      }
+  });
+});
+</script>
 </body>
 </html>

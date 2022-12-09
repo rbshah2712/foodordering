@@ -23,6 +23,9 @@
         <a href="payments.php" class="nav-link">Payments</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
+        <a href="food_review.php" class="nav-link">Food Reviews</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
         <a href="customers.php" class="nav-link">Customers</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">

@@ -5,14 +5,17 @@ if(isset($_POST['add'])){
         $res_address = $_POST['res_address'];
         $res_contact = $_POST['res_contact'];
         $res_email = $_POST['res_email'];
+        $res_website = $_POST['res_website'];
+        $res_business_hrs = $_POST['res_business_hrs'];
+        $res_business_days = $_POST['res_business_days'];
         $is_featured = $_POST['featured'];
        
         if($res_name!= NULL){
        // $photoupload = $_POST['photoupload'];
-        $query = "INSERT INTO tbl_restaurant(res_name,res_address,res_contact,res_email,is_featured,is_active) VALUES('".$res_name."','".$res_address."','".$res_contact."','".$res_email."','".$is_featured."','1')";
+        $query = "INSERT INTO tbl_restaurant(res_name,res_img,res_address,res_contact,res_email,res_website,business_hours,business_days_open,is_featured,is_active) VALUES('".$res_name."','','".$res_address."','".$res_contact."','".$res_email."','".$res_website."','".$res_business_hrs."','".$res_business_days."','".$is_featured."','1')";
         $result = mysqli_query($connect,$query);
         $id = mysqli_insert_id($connect);
-       /* if(!empty($_FILES["photoupload"]["name"])) { 
+        if(!empty($_FILES["photoupload"]["name"])) { 
             $target_dir = "uploads/categories/";
             // Get file info 
             $fileName = $target_dir.basename($_FILES["photoupload"]["name"]); 
@@ -24,7 +27,7 @@ if(isset($_POST['add'])){
                 if(move_uploaded_file($image,$target_dir.$_FILES["photoupload"]["name"])){
                 //$imgContent = addslashes(file_get_contents($image)); 
                 // Insert image content into database 
-                $update = "UPDATE tbl_restaurant SET img='".$fileName."' WHERE cat_id='".$id."'"; 
+                $update = "UPDATE tbl_restaurant SET img='".$fileName."' WHERE id='".$id."'"; 
                 $result = mysqli_query($connect,$update);
                 if($result == TRUE){ 
                    set_msg('Record is added successfully'); 
@@ -39,7 +42,7 @@ if(isset($_POST['add'])){
           set_msg('Please upload jpg,png,gif or jpeg files','danger');
         }
     } 
-  }else{*/
+  }else{
       set_msg('Record is added successfully'); 
       header('location:restaurant.php');
   }
@@ -68,35 +71,7 @@ if(isset($_POST['add'])){
   <?php include('topmenu.php');?>
   <!-- /.navbar -->
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <a href="dashboard.php" class="brand-link">
-      <img src="img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
-    </a>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?php echo $baseURL.$_SESSION['pic'];?>" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['full_name'];?></a>
-        </div>
-      </div>
-
-      <!-- SidebarSearch Form -->
-  
-
-      <!-- Sidebar Menu -->
-     
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+  <?php include('sidebar.php');?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -131,26 +106,34 @@ if(isset($_POST['add'])){
               <form action="add_restaurant.php" method="post" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="fullname">Restaurant Name</code></label>
+                  <label for="res_name">Restaurant Name</code></label>
                   <input type="text" class="form-control form-control-border" name="res_name" id="res_name" placeholder="Enter Restaurant" required>
                 </div>
                 <div class="form-group">
-                  <label for="fullname">Restaurant Address</code></label>
+                  <label for="res_address">Restaurant Address</code></label>
                   <input type="text" class="form-control form-control-border" name="res_address" id="res_address" placeholder="Enter Restaurant Address" required>
                 </div>
                 <div class="form-group">
-                  <label for="fullname">Restaurant Contact</code></label>
+                  <label for="res_contact">Restaurant Contact</code></label>
                   <input type="text" maxlength="12" pattern="[0-9]{3}[-][0-9]{3}[-][0-9]{4}" class="form-control form-control-border" name="res_contact" id="res_contact" placeholder="Enter Restaurant Contact" required>
                 </div>
                 <div class="form-group">
-                  <label for="fullname">Restaurant Email</code></label>
+                  <label for="res_email">Restaurant Email</code></label>
                   <input type="email" class="form-control form-control-border" name="res_email" id="res_email" placeholder="Enter Restaurant Email" required>
                 </div>
-                <div class="form-group icheck-primary">
-                  <label for="featured">Featured</code></label>
-                  <input type="checkbox" class="form-check-input" name="featured" id="featured"  value="1">
+                <div class="form-group">
+                  <label for="res_website">Restaurant Website</code></label>
+                  <input type="url" class="form-control form-control-border" name="res_website" id="res_website" placeholder="Enter Restaurant Website" required>
                 </div>
-               <!-- <div class="form-group">
+                <div class="form-group">
+                  <label for="res_business_hrs">Restaurant Business Hours</code></label>
+                  <input type="url" class="form-control form-control-border" name="res_business_hrs" id="res_business_hrs" placeholder="Enter Restaurant Website" required>
+                </div>
+                <div class="form-group">
+                  <label for="res_business_days">Restaurant Business Days</code></label>
+                  <input type="url" class="form-control form-control-border" name="res_business_days" id="res_business_days" placeholder="Enter Restaurant Website" required>
+                </div>
+               <div class="form-group">
                     <label for="photoupload">Image</label>
                     <div class="input-group">
                       <div class="custom-file">
@@ -161,7 +144,11 @@ if(isset($_POST['add'])){
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
-                  </div>-->
+                </div>
+                <div class="form-group icheck-primary">
+                  <label for="featured">Featured</code></label>
+                  <input type="checkbox" class="form-check-input" name="featured" id="featured"  value="1">
+                </div>
                 <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-flat" id="add" name="add" value="add">Add</button>
                 <button type="reset" class="btn btn-light btn-flat" id="cancel" name="cancel">Cancel</button>

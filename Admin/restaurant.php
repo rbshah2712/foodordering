@@ -25,7 +25,7 @@ $result = mysqli_query($connect,$query);
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php echo $website;?>| Categories</title>
+  <title><?php echo $website;?>| Restaurant</title>
 
   <?php include('styles.php');?>
 </head>
@@ -50,13 +50,13 @@ $result = mysqli_query($connect,$query);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3>Restaurants</h3>
+            <h3>Restaurant</h3>
             <?php get_msg();?>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Restaurants</li>
+              <li class="breadcrumb-item">Restaurant</li>
             </ol>
           </div>
         </div>
@@ -70,7 +70,7 @@ $result = mysqli_query($connect,$query);
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Restaurants</h3><br/><br/> 
+                <h3 class="card-title">Restaurant</h3><br/><br/> 
                 <a href="add_restaurant.php"><button type="button" id="add" value="Add" class="btn btn-primary">Add</button></a>
               </div>
               <!-- /.card-header -->
@@ -83,8 +83,9 @@ $result = mysqli_query($connect,$query);
                       <th>Restaurant Address</th>
                       <th>Restaurant Contact</th>
                       <th>Restaurant Email</th>
-                      <!--<th>Image</th>-->
+                      <th>Restaurant Website</th>
                       <th>Featured</th>
+                      <th>Restaurant Image</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -100,7 +101,9 @@ $result = mysqli_query($connect,$query);
                       <td><?php echo $row->res_address;?></td>
                       <td><?php echo $row->res_contact;?></td>
                       <td><?php echo $row->res_email;?></td>
+                      <td><?php echo $row->res_website;?></td>
                       <td><?php echo $row->is_featured;?></td>
+                      <td><img src="<?php echo $baseURL.$row->res_img;?>" alt="<?php echo $row->res_name;?>" width="50px" height="100%"></td>
                       <td><a href="edit_restaurant.php?id=<?php echo $row->id;?>"><button type="button" id="edit" value="Edit" class="btn"><i class="fa fa-edit"></i></button></a>&nbsp;
                       <a onclick='javascript:confirmationDelete($(this));return false;' href='del_restaurant.php?id=<?php echo $row->id;?>' class="btn"><i class="fa fa-trash"></i></a>
                     <?php } } ?>

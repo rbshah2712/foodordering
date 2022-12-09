@@ -11,20 +11,21 @@ if (isset($_GET['page_no']) && $_GET['page_no']!="") {
   $next_page = $page_no + 1;
   $adjacents = "2"; 
  
-  $result_count = mysqli_query($connect,"SELECT COUNT(*) As total_records FROM tbl_food ");
+  $result_count = mysqli_query($connect,"SELECT COUNT(*) As total_records FROM tbl_food_review ");
   $total_records = mysqli_fetch_array($result_count);
   $total_records = $total_records['total_records'];
   $total_no_of_pages = ceil($total_records / $total_records_per_page);
   $second_last = $total_no_of_pages - 1; // total page minus 1
-$query = "Select * from tbl_food WHERE is_active = '1'";
+$query = "Select * from tbl_food_review";
 $result = mysqli_query($connect,$query);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?php echo $website;?>| Food By Categories</title>
+  <title><?php echo $website;?>| Food Reviews</title>
 
   <?php include('styles.php');?>
 </head>
@@ -36,10 +37,12 @@ $result = mysqli_query($connect,$query);
 
   <!-- Main Sidebar Container -->
  
+
     <!-- Sidebar -->
-    <?php include('sidebar.php');?>
+  <?php include('sidebar.php');?>
     <!-- /.sidebar -->
-  
+ 
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -47,13 +50,13 @@ $result = mysqli_query($connect,$query);
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3>Food By Category</h3>
-            <?php get_msg();?> 
-        </div>
+            <h3>Food Reviews</h3>
+            <?php get_msg();?>
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item">Food By Category</li>
+              <li class="breadcrumb-item">Food Reviews</li>
             </ol>
           </div>
         </div>
@@ -67,8 +70,8 @@ $result = mysqli_query($connect,$query);
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Food By Category</h3><br/><br/> 
-                <a href="add_food_category.php"><button type="button" id="add" value="Add" class="btn btn-primary">Add</button></a>
+                <h3 class="card-title">Food Reviews</h3><br/><br/> 
+                <a href="add_food_review.php"><button type="button" id="add" value="Add" class="btn btn-primary">Add</button></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -77,10 +80,10 @@ $result = mysqli_query($connect,$query);
                     <tr>
                       <th style="width: 10px">#</th>
                       <th>Food Name</th>
-                      <th>Category Name</th>
-                      <th>Image</th>
-                      <th>Price</th>
-                      <th>Featured</th>
+                      <th>User Name</th>
+                      <th>Ratings</th>
+                      <th>Reviews</th>
+                      <!--<th>Image</th>-->
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -92,19 +95,18 @@ $result = mysqli_query($connect,$query);
                         ?>
                     <tr>
                       <td><?php echo $row->id;?></td>
-                      <td><?php echo $row->food_name;?></td>
-                      <td><?php $getRow = mysqli_fetch_assoc(mysqli_query($connect,"select title from tbl_category where cat_id = '".$row->category_id."'"));echo $getRow['title'];?></td>
-                      <td><img src="<?php echo $baseURL.$row->img;?>" alt="<?php echo $row->food_name;?>" width="50px" height="100%"></td>
-                      <td><?php echo $row->price;?></td>
-                      <td><?php echo $row->is_featured;?></td>
-                      <td><a href="edit_food_category.php?id=<?php echo $row->id;?>"><button type="button" id="edit" value="Edit" class="btn"><i class="fa fa-edit"></i></button></a>&nbsp;
-                      <a onclick='javascript:confirmationDelete($(this));return false;' href='del_food_category.php?id=<?php echo $row->id;?>' class="btn"><i class="fa fa-trash"></i></a>
+                      <td><?php echo $row->food_id;?></td>
+                      <td><?php echo $row->user_id;?></td>
+                      <td><?php echo $row->stars;?></td>
+                      <td><?php echo $row->review_note;?></td>
+                      <td><a href="edit_food_review.php?id=<?php echo $row->id;?>"><button type="button" id="edit" value="Edit" class="btn"><i class="fa fa-edit"></i></button></a>&nbsp;
+                      <a onclick='javascript:confirmationDelete($(this));return false;' href='del_food_review.php?id=<?php echo $row->id;?>' class="btn"><i class="fa fa-trash"></i></a>
                     <?php } } ?>
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
-            <?php include('pagination.php');?>
+              <?php include('pagination.php');?>
             </div>
             <!-- /.card -->
             <!-- /.card -->

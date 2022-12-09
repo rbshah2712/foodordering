@@ -1,5 +1,5 @@
 <?php include('db.php'); 
-   include('auth.php');
+      include('auth.php');
    $orders_res = mysqli_query($connect,'Select * from tbl_order where order_status="Received"'); 
    $total_orders = mysqli_num_rows($orders_res);
 
@@ -59,7 +59,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
+        <!-- Small boxes (Stat box) --> 
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->

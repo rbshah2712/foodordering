@@ -57,7 +57,7 @@ if(isset($_POST['login'])){
     <!-- /.card-header -->
     <!-- form start -->
     <?php get_msg();?>
-    <form class="form-horizontal" action="index.php" method="post">
+    <form class="form-horizontal" action="index.php" method="post" name="loginform" id="loginform">
       <div class="card-body">
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
@@ -104,5 +104,43 @@ if(isset($_POST['login'])){
     
 </section>
   </div>
+  <?php include('scripts.php');?>
+  <script>
+   $(document).ready(function () {
+  $('#loginform').validate({
+    rules: {
+      username: {
+        required: true
+      },
+      pwd: {
+        required: true
+      }
+    },
+    messages: {
+      username: {
+        required: "Please enter username"
+      },
+      pwd: {
+        required: "Please enter password"
+      },
+    },
+    errorElement: 'span',
+    errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-group').append(error);
+    },
+    highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+    },
+    unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+    },
+     
+    submitHandler: function (form) {
+      $('#loginform').submit();
+      }
+  });
+});
+</script>
 </body>
 </html>

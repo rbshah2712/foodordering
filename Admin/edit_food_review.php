@@ -82,7 +82,34 @@ if(isset($_POST['edit'])){
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
- <?php include('sidebar.php');?>
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="dashboard.php" class="brand-link">
+      <img src="img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Food Order</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="<?php echo $baseURL.$_SESSION['pic'];?>" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"><?php echo $_SESSION['full_name'];?></a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+  
+
+      <!-- Sidebar Menu -->
+     
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -92,7 +119,7 @@ if(isset($_POST['edit'])){
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1>Edit Admin Users</h1>
-        </div>
+<         </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -109,56 +136,35 @@ if(isset($_POST['edit'])){
         <div class="row">
           <div class="col-12">      
               <!-- /.card-header -->
-              <h4><a href="admin.php" class="card-link">Back</a></h4>
+              <h4><a href="food_review.php" class="card-link">Back</a></h4>
               <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edit Admin Users</h3>
+                <h3 class="card-title">Edit Food Reviews</h3>
               </div>
               <!-- /.card-header -->
-              <form action="edit_admin.php" method="post" enctype="multipart/form-data">
+              <form action="edit_food_review.php" method="post" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="exampleInputBorder">Full Name</code></label>
-                  <input type="text" class="form-control form-control-border" name="fullname" id="fullname" placeholder="Enter Full Name" value="<?php echo $fullname;?>">
+                  <label for="fullname">Food Name</code></label>
+                  <input type="text" class="form-control form-control-border" name="title" id="title" placeholder="Enter Title" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputBorderWidth2">Username</code></label>
-                  <input type="text" class="form-control form-control-border border-width-2" name="username" id="username" placeholder="Enter Username" value="<?php echo $username;?>">
+                  <label for="featured">User Name</code></label>
+                  <input type="text" class="form-control form-control-border" name="username" id="username" placeholder="Enter Username">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputRounded0">Password</code></label>
-                  <div class="row">
-                  <input type="password" class="form-control form-control-border border-width-2 col-md-6" name="pwd" id="pwd" placeholder="Enter Password" value="<?php echo $pwd;?>">
-                  <i class="fas fa-eye field-icon toggle-password" toggle="#pwd"></i>
-                  </div>
+                  <label for="featured">Rating</code></label>
+                  <input type="text" class="form-control form-control-border" name="rating" id="rating" placeholder="Enter Rating" >
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputRounded0">Repeat Password</code></label>
-                  <div class="row">
-                  <input type="password" class="form-control form-control-border border-width-2 col-md-6" name="rptpwd" id="rptpwd" placeholder="Enter Password" value="<?php echo $pwd;?>">
-                  <i class="fas fa-eye field-icon toggle-password" toggle="#rptpwd"></i>
-                  </div>
+                  <label for="featured">Note</code></label>
+                  <textarea  class="form-control form-control-border" name="notes" id="notes" placeholder="Enter Review Note"></textarea>
                 </div>
-                <img src="<?php echo $baseURL.$img;?>" width="50px" height="100%">
-                <input type="hidden" value="<?php echo $img;?>" name="photouploadpreview" id="photouploadpreview" >
-                <div class="form-group">
-                    <label for="photoupload">Image</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="photoupload" id="photoupload">
-                        <label class="custom-file-label" for="photoupload">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                      <input type="hidden" id="adminid" name="adminid" value=<?php echo $id;?>>
-                    </div>
-                  </div>
                 <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-flat" id="edit" name="edit" value="edit">Edit</button>
                 <button type="reset" class="btn btn-light btn-flat" id="cancel" name="cancel">Cancel</button>
             </div>
-          </form>
+</form>
               </div>
               <!-- /.card-body -->
             </div>

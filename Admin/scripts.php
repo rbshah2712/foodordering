@@ -1,4 +1,6 @@
 <script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
@@ -25,15 +27,13 @@ if (input.attr("type") == "password" || input.attr("type") == "rptpwd") {
       window.location=anchor.attr("href");
 }
 
-$(document).ready(function(){
+jQuery(document).ready(function(){
   
-  $(function () {
-	$('#order_date').datepicker({
+  jQuery(function () {
+    jQuery('#order_date').datepicker({
    format: 'dd/mm/yyyy' 
   });
   });
-	
-  
 });
 
 </script>

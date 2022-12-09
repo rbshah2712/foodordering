@@ -59,10 +59,16 @@ if(isset($_POST['login'])){
     <?php get_msg();?>
     <form class="form-horizontal" action="index.php" method="post">
       <div class="card-body">
+      <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-2 col-form-label">Full Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="full_name" id="full_name" placeholder="Full Name" value="">
+          </div>
+        </div>
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>">
+            <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="">
           </div>
         </div>
         <div class="form-group row">
@@ -71,19 +77,29 @@ if(isset($_POST['login'])){
             <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>">
           </div>
         </div>
-        <div class="row checkbox-row">
-        <div class="custom-control custom-checkbox col-sm-6">
-        <div class="checkbox-inline" style="text-align:center;">
-          <input class="custom-control-input" type="checkbox" name="remember_me" id="remember_me">
-          <label for="remember_me" class="custom-control-label">Remember Me</label>
+        <div class="form-group row">
+          <label for="inputPassword3" class="col-sm-2 col-form-label">Confirm Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" name="confpwd" id="confpwd" placeholder="Confirm Password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>">
+          </div>
         </div>
-      </div>
-      </div>
+        <div class="form-group row">
+                    <label for="photoupload" class="col-sm-2 col-form-label">Image</label>
+                    <div class="input-group col-sm-10">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="photoupload" id="photoupload">
+                        <label class="custom-file-label" for="photoupload">Choose file</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text">Upload</span>
+                      </div>
+                    </div>
+</div>
       </div>
       <!-- /.card-body -->
       <div class="form-group row">
       <div class="offset-sm-2 col-sm-10">
-        <button type="submit" class="btn btn-info" id="login" name="login" value="login">Sign in</button>
+        <button type="submit" class="btn btn-info" id="register" name="register" value="register">Sign Up</button>
         <button type="reset" class="btn btn-default" id="cancel" name="cancel">Cancel</button>
       </div>
       </div>
@@ -91,11 +107,6 @@ if(isset($_POST['login'])){
     </form>
     
   </div>
-  <div class="form-group row">
-  <div class="offset-sm-2 col-sm-10">
-    <a href="register.php" class="btn btn-danger">Register</a>&nbsp;
-    <a href="forgot_pass.php" class="btn btn-danger" >Forgot Password?</a> </div>
-    </div>
   </div>
   
         </div>
